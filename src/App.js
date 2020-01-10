@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import * as d3 from "d3";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  componentDidMount() {
+    const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+
+    const w = 600;
+    const h = 300;
+
+    const svg = d3
+      .select(this.refs.chart)
+      .append("svg")
+      .attr("width", w)
+      .attr("height", h)
+      .style("border", "1px solid red")
+      .attr("class", "bar");
+
+    svg
+      .selectAll("rect")
+      .data(dataset)
+      .enter()
+      .append("rect")
+      .attr("fill", "navy")
+      .attr("class", "sBar")
+      .attr("x", (d, i) => i * 60)
+      .attr("y", (d, i) => {
+        return h - 7 * d;
+      })
+      .attr("width", 50)
+      .attr("height", (d, i) => 7 * d)
+      .append("title")
+      .text(d => d);
+
+    svg
+      .selectAll("text")
+      .data(dataset)
+      .enter()
+      .append("text")
+      .style("font-size", 18)
+      .attr("fill", "red")
+      .attr("x", (d, i) => i * 60)
+      .attr("y", (d, i) => h - 7 * d - 3)
+      .text(d => d);
+  }
+  render() {
+    const styles = {
+      container: {
+        display: "grid",
+        justifyItems: "center"
+      }
+    };
+    return (
+      <div ref="chart" style={styles.container}>
+        <h1 style={{ textAlign: "center" }}>Hi, I'm the bar chart</h1>
+      </div>
+    );
+  }
 }
 
 export default App;
