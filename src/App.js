@@ -1,6 +1,5 @@
 import React from "react";
 import * as d3 from "d3";
-import "./App.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +17,6 @@ class App extends React.Component {
       .append("svg")
       .attr("width", w)
       .attr("height", h)
-      .style("border", "1px solid red")
       .attr("class", "bar");
 
     svg
@@ -57,7 +55,7 @@ class App extends React.Component {
     };
     return (
       <div ref="chart" style={styles.container}>
-        <h1 style={{ textAlign: "center" }}>Hi, I'm the bar chart</h1>
+        <h1 style={{ textAlign: "center" }}>Hi, I'm the bar chart :)</h1>
       </div>
     );
   }
